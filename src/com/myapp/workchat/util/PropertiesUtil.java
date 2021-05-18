@@ -4,8 +4,8 @@ import java.io.InputStream;
 
 import java.util.Properties;
 
-
-
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 
@@ -30,5 +30,7 @@ public class PropertiesUtil {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	
 	
 }

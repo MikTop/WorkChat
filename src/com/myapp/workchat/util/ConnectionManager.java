@@ -3,12 +3,15 @@ package com.myapp.workchat.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import com.mysql.cj.jdbc.Driver;
 
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class ConnectionManager {
+	
+	
 	
 	private final static String URL_KEY = "db.url";
 	private final static String USERNAME_KEY = "db.username";
@@ -29,8 +32,7 @@ public class ConnectionManager {
 	@SneakyThrows
 	private static void loaddriver() {
 		
-			Class.forName("com.mysql.cj.jdbc.Driver.class");
-		
+			Class.forName("com.mysql.cj.jdbc.Driver");
 		
 	}
 }
