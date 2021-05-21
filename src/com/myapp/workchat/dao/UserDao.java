@@ -38,8 +38,8 @@ public class UserDao implements Dao<Integer, User>{
 			""";
 	
 	private static final String SQL_SAVE = """
-			 INSERT INTO user (first_name, second_name, email, password, image, birthday)
-			VALUES (?, ?, ?, ?, ?, ?)""";
+			 INSERT INTO user (first_name, second_name, email, password, image, birthday, role)
+			VALUES (?, ?, ?, ?, ?, ?, ?)""";
 			
 
 	@Override
@@ -114,6 +114,7 @@ public class UserDao implements Dao<Integer, User>{
 			preparedStatement.setObject(4, entity.getPassword());
 			preparedStatement.setObject(5, entity.getImage());
 			preparedStatement.setObject(6, entity.getBirthday());
+			preparedStatement.setObject(7, entity.getRole().name());
 			
 			
 			preparedStatement.executeUpdate();

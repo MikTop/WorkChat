@@ -27,7 +27,7 @@ public class CreateUserMapper {
 				.email(userCreate.getEmail())
 				.password(userCreate.getPassword())
 				.image(userCreate.getImage())
-				.role(Role.valueOf(userCreate.getRole()))
+				.role(Role.find(userCreate.getRole()).orElse(null))
 				.birthday(LocalDateFormatter.format(userCreate.getBirthday()))
 				.id(0)
 				.build();

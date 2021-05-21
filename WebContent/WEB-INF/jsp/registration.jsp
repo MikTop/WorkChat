@@ -33,14 +33,18 @@
 		</label><br>
 		
 		<label for="role">Role:
-			<br>
-			<c:forEach var="role" items="${requestScope.roles}">
-			<input name="role" type="radio" value="${role}"> ${role}<br>
-			</c:forEach>
+			<select name="role">
+				<c:forEach var="role" items="${requestScope.roles}">
+					<option value="${role}"> ${role}</option> 
+				</c:forEach>
+			</select>
 		</label><br>
 		<button type="submit" >Send</button>
+		<br>
 		
-		
+		<a href="${pageContext.request.contextPath}/login">
+			<button type="button">Login</button>
+		</a>
 		
 	
 	</form>

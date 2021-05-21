@@ -8,12 +8,17 @@
 <title>Profile info</title>
 </head>
 <body>
+<%@ include file="header.jsp" %>
 	<span>Profile info</span>
 	
 		<c:if test="${not empty sessionScope.user}">
-			<p>${sessionScope.user }</p>
+			<span>First name: ${sessionScope.user.firstName}</span><br>
+			<span>Second Name: ${sessionScope.user.secondName}</span><br>
+			<span>Email: ${sessionScope.user.email}</span><br>
+			<span>Image: ${sessionScope.user.image}</span><br>
+			<span>Birthday: ${sessionScope.user.birthday}</span><br>
+			<span>Role: ${sessionScope.user.role}</span><br>
 			
-		
 		</c:if> 
 	
 	
