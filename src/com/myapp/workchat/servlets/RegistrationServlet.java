@@ -8,11 +8,13 @@ import com.myapp.workchat.service.UserService;
 import com.myapp.workchat.util.JspPath;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@MultipartConfig(fileSizeThreshold = 1024*1024)
 @SuppressWarnings("serial")
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
@@ -29,7 +31,8 @@ public class RegistrationServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)  {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException  {
+		
 		UserCreate user = UserCreate.builder()
 				.firstName(req.getParameter("firstName"))
 				.secondName(req.getParameter("secondName"))
@@ -37,6 +40,7 @@ public class RegistrationServlet extends HttpServlet {
 				.password(req.getParameter("password"))
 				.birthday(req.getParameter("birthday"))
 				.role(req.getParameter("role"))
+				.image(req.getPart("image"))
 				.build();
 		
 		userService.createUser(user);

@@ -1,17 +1,22 @@
 package com.myapp.workchat.service;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.Optional;import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.myapp.workchat.dao.UserDao;
 import com.myapp.workchat.dto.UserCreate;
 import com.myapp.workchat.dto.UserDto;
+import com.myapp.workchat.dto.UserMinimal;
 import com.myapp.workchat.entity.User;
 import com.myapp.workchat.mappers.CreateUserMapper;
 import com.myapp.workchat.mappers.UserDtoMapper;
+import com.myapp.workchat.mappers.UserMinMapper;
 import com.myapp.workchat.validators.CreateUserValidator;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserService {
@@ -24,13 +29,16 @@ public class UserService {
 	private final CreateUserMapper createUserMapper = CreateUserMapper.getInctance();
 	private final CreateUserValidator createUserValidator = CreateUserValidator.getInctance();
 	private final UserDtoMapper userDtoMapper = UserDtoMapper.getInctance();
+	private final ImageService imageService = ImageService.getInctance();
+	private final UserMinMapper userMinMapper = UserMinMapper.getInctance();
 	
 	
 	
-	
+	@SneakyThrows
 	public  User createUser (UserCreate userCreate) {
-		
-		return userDao.save(createUserMapper.MapToUser(userCreate));
+		User user = createUserMapper.MapToUser(userCreate);
+		imageService.saveImage(user.getImage(), userCreate.getImage().getInputStream());
+		return userDao.save(user);
 		
 		}
 	
@@ -43,7 +51,13 @@ public class UserService {
 		
 		}
 	
-	
+public List<UserMinimal> findAll () {
+		
+		return userDao.findAll().stream()
+				.map(user -> userMinMapper.mapTo(user))
+				.collect(Collectors.toList());
+		
+		}
 	
 	
 	

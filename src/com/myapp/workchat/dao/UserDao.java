@@ -1,5 +1,7 @@
 package com.myapp.workchat.dao;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -14,13 +16,14 @@ import com.myapp.workchat.entity.Role;
 import com.myapp.workchat.entity.User;
 import com.myapp.workchat.util.ConnectionManager;
 
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = PRIVATE)
 public class UserDao implements Dao<Integer, User>{
+	
+	
 	
 	private static final UserDao INCTANCE = new UserDao();
 	
@@ -45,7 +48,7 @@ public class UserDao implements Dao<Integer, User>{
 	@Override
 	@SneakyThrows
 	public List<User> findAll() {
-		try(Connection connection = ConnectionManager.openConnection();
+		try(Connection connection = ConnectionManager.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_ALL)){
 			
 			
@@ -66,7 +69,7 @@ public class UserDao implements Dao<Integer, User>{
 	@SneakyThrows
 	public Optional<User> findByEmailAndPassword(String email, String password) {
 		
-		try(Connection connection = ConnectionManager.openConnection();
+		try(Connection connection = ConnectionManager.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_EMAIL_AND_PASSWORD)){
 			
 			preparedStatement.setObject(1, email);
@@ -106,7 +109,7 @@ public class UserDao implements Dao<Integer, User>{
 	@Override
 	@SneakyThrows
 	public User save(User entity) {
-		try(Connection connection = ConnectionManager.openConnection();
+		try(Connection connection = ConnectionManager.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE, Statement.RETURN_GENERATED_KEYS )){
 			preparedStatement.setObject(1, entity.getFirstName());
 			preparedStatement.setObject(2, entity.getSecondName());

@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class CreateUserMapper {
 	
 	private final static CreateUserMapper INCTANCE = new CreateUserMapper();
+	private final String imagePath = "users\\";
 	
 	public static CreateUserMapper getInctance () {
 		return INCTANCE;
@@ -26,7 +27,7 @@ public class CreateUserMapper {
 				.secondName(userCreate.getSecondName())
 				.email(userCreate.getEmail())
 				.password(userCreate.getPassword())
-				.image(userCreate.getImage())
+				.image(imagePath + userCreate.getImage().getSubmittedFileName())
 				.role(Role.find(userCreate.getRole()).orElse(null))
 				.birthday(LocalDateFormatter.format(userCreate.getBirthday()))
 				.id(0)

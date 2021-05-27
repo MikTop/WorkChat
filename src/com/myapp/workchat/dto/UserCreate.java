@@ -1,5 +1,6 @@
 package com.myapp.workchat.dto;
 
+import jakarta.servlet.http.Part;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class UserCreate {
 		private String secondName;
 		private String email;
 		private String password;
-		private String image;
+		private Part image;
 		private String birthday;
 		private String role;
 }
