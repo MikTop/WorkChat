@@ -43,6 +43,13 @@ public class UserDao implements Dao<Integer, User>{
 	private static final String SQL_SAVE = """
 			 INSERT INTO user (first_name, second_name, email, password, image, birthday, role)
 			VALUES (?, ?, ?, ?, ?, ?, ?)""";
+	
+	private static final String SQL_FIND_BY_ID = """
+			SELECT
+			id, first_name, second_name, email, password, image, birthday, role 
+			FROM user
+			WHERE id = ?
+			""";
 			
 
 	@Override
@@ -85,13 +92,34 @@ public class UserDao implements Dao<Integer, User>{
 		}
 		
 	}
-
+	public List<User> findByIdList (List<Integer> idList){
+		List <User> resultList = new ArrayList<>();
+		
+		for(Integer i : idList) {
+			findById(i).ifPresent(user -> resultList.add(user));
+		}
+		
+		return resultList;
+	}
 	
 	
+	@SneakyThrows
 	@Override
 	public Optional<User> findById(Integer id) {
 		
-		return null;
+		try(Connection connection = ConnectionManager.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_ID)){
+				
+				preparedStatement.setObject(1, id);
+
+				ResultSet resultSet = preparedStatement.executeQuery();
+				User user = null;
+				if(resultSet.next()) {
+					user = build(resultSet);
+							
+				}
+				return Optional.ofNullable(user);
+			}
 	}
 
 	@Override

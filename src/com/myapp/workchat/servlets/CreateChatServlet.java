@@ -1,6 +1,9 @@
 package com.myapp.workchat.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.myapp.workchat.service.UserService;
 import com.myapp.workchat.util.JspPath;
@@ -28,8 +31,8 @@ public class CreateChatServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		List<String> chatMembersId =  Arrays.asList(req.getParameterValues("chatMembers"));
 	}
+	
 
 }

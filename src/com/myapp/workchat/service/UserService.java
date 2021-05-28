@@ -37,7 +37,12 @@ public class UserService {
 	@SneakyThrows
 	public  User createUser (UserCreate userCreate) {
 		User user = createUserMapper.MapToUser(userCreate);
+		if(userCreate.getImage().getSize() > 0) {
 		imageService.saveImage(user.getImage(), userCreate.getImage().getInputStream());
+		}else {
+			user.setImage("users\\tiger.jpg");
+		}
+		// TODO Вынести в валидатор эту проверку
 		return userDao.save(user);
 		
 		}

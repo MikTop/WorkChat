@@ -22,6 +22,7 @@ public class ImageService {
 	
 	@SneakyThrows
 	public void saveImage(String imagePath, InputStream imageContent) {
+		
 		Path imageFullPath = Path.of(IMAGEBASEPATH, imagePath);
 		try(imageContent) {
 			Files.createDirectories(imageFullPath.getParent());
