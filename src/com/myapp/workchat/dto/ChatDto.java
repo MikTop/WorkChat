@@ -1,21 +1,19 @@
-package com.myapp.workchat.entity;
+package com.myapp.workchat.dto;
+
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Builder
-public class Message {
+public class ChatDto {
 	
-	private Long Id;
-	private Integer chatId;
-	private String message;
-	private Integer senderId;
-	
-	
-
+	List<UserMinimal> chatsMembers;
+	String chatName;
+	Integer chatId;
 }

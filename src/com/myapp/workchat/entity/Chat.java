@@ -13,20 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Chat {
 
-	private List<User> chatMembers;
+	private List<Integer> membersId;
 	private String chatName;
-	private List<Message> messages;
+	private Integer chatId;
 	
-	public void addMessage(Message message) {
-		this.messages.add(message);
-	}
-	
-	public void addMember(User user) {
-		this.chatMembers.add(user);
-	}
-	
-	public void deleteMember(User user) {
-		this.chatMembers.remove(user);
-	}
 	
 }

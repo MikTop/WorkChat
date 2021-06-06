@@ -12,6 +12,7 @@ import com.myapp.workchat.entity.User;
 import com.myapp.workchat.mappers.CreateUserMapper;
 import com.myapp.workchat.mappers.UserDtoMapper;
 import com.myapp.workchat.mappers.UserMinMapper;
+import com.myapp.workchat.util.Converter;
 import com.myapp.workchat.validators.CreateUserValidator;
 
 import lombok.AccessLevel;
@@ -37,12 +38,14 @@ public class UserService {
 	@SneakyThrows
 	public  User createUser (UserCreate userCreate) {
 		User user = createUserMapper.MapToUser(userCreate);
-		if(userCreate.getImage().getSize() > 0) {
+		/*if(userCreate.getImage().getSize() > 0) {
 		imageService.saveImage(user.getImage(), userCreate.getImage().getInputStream());
 		}else {
 			user.setImage("users\\tiger.jpg");
 		}
-		// TODO Вынести в валидатор эту проверку
+		// TODO Вынести в маппер эту проверку
+		 * */
+		 
 		return userDao.save(user);
 		
 		}
@@ -63,6 +66,16 @@ public List<UserMinimal> findAll () {
 				.collect(Collectors.toList());
 		
 		}
+
+public List<UserMinimal> findByIdList (List<Integer> membersId ){
+	List<User> members;
+	members = userDao.findByIdList(membersId);
+	
+	
+	return members.stream()
+			.map(user -> userMinMapper.mapTo(user))
+			.collect(Collectors.toList());
+}
 	
 	
 	

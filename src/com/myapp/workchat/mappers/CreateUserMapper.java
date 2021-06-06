@@ -27,7 +27,9 @@ public class CreateUserMapper {
 				.secondName(userCreate.getSecondName())
 				.email(userCreate.getEmail())
 				.password(userCreate.getPassword())
-				.image(imagePath + userCreate.getImage().getSubmittedFileName())
+				.image(imagePath + (userCreate.getImage().getSize() > 0 
+						? userCreate.getImage().getSubmittedFileName()
+								: "tiger.jpg"))
 				.role(Role.find(userCreate.getRole()).orElse(null))
 				.birthday(LocalDateFormatter.format(userCreate.getBirthday()))
 				.id(0)
