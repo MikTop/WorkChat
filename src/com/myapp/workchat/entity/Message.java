@@ -1,5 +1,7 @@
 package com.myapp.workchat.entity;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +17,7 @@ public class Message {
 	private Integer chatId;
 	private String message;
 	private Integer senderId;
+	private LocalDateTime sendDate;
 	
 	
 

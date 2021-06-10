@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.myapp.workchat.dto.UserDto;
 import com.myapp.workchat.entity.Chat;
 import com.myapp.workchat.service.ChatService;
 import com.myapp.workchat.service.UserService;
@@ -37,15 +38,14 @@ public class CreateChatServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<String> chatMembersId =  Arrays.asList(req.getParameterValues("chatMembers"));
-		
 		chatService.createNewChat(chatMembersId);
-		
+		resp.sendRedirect(PropertiesUtil.getProperty("tomcat.apl.path") + "/chatList" );
 	}
 	
 	@SneakyThrows
 	private void onCreateSucces(Chat chat, HttpServletRequest request, HttpServletResponse response) {
 		request.getSession().setAttribute("chat", chat);
-		response.sendRedirect(PropertiesUtil.getProperty("tomcat.apl.path") + "/chat/" + chat.getChatName());
+		response.sendRedirect(PropertiesUtil.getProperty("tomcat.apl.path") + "/chatList" );
 	}
 	
 	@SneakyThrows

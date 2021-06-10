@@ -21,5 +21,5 @@ public class User {
 	private String image;
 	private LocalDate birthday;
 	private Role role;
-	private List<String> includedChat;
+	
 }

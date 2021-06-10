@@ -19,7 +19,7 @@
 			</c:if>
 				
 		</c:forEach>
-	
+		<input hidden="true" name="chatMembers" value="${sessionScope.user.id}">
 		<button type="submit">Create chat</button>
 	
 	</form>

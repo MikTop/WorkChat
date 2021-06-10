@@ -18,8 +18,8 @@
 			<span>Email: ${sessionScope.user.email}</span><br>
 			<span>Image: ${sessionScope.user.image}</span><br>
 			<span>Role: ${sessionScope.user.role}</span><br>
-			<a href="${pageContext.request.contextPath}/chat">
-				<button type="button">Chat page</button>
+			<a href="${pageContext.request.contextPath}/chatList">
+				<button type="button">Chat List page</button>
 			</a>
 			
 		</c:if> 
